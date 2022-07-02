@@ -1,5 +1,6 @@
 import 'package:realm/realm.dart';
 part 'product.g.dart';
+
 @RealmModel()
 class _Product {
   String? name;

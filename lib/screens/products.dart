@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -334,7 +336,7 @@ class ProductsState extends State<Products> {
                                   return StatefulBuilder(
                                     builder: (context, setState) {
                                       return AlertDialog(
-                                        title: Text('Add Product'),
+                                        title: Text('Edit Product'),
                                         content: SingleChildScrollView(
                                           scrollDirection: Axis.vertical,
                                           child: Form(
@@ -381,7 +383,7 @@ class ProductsState extends State<Products> {
                                                     },
                                                     validator: (String? value) {
                                                       if (value == null) {
-                                                        return "Required".tr;
+                                                        return "Required";
                                                       } else {
                                                         return null;
                                                       }
@@ -548,17 +550,25 @@ class ProductsState extends State<Products> {
                                               setState(() {
                                                 var item = realm.query<Product>(
                                                     "name == '${product.name}'");
-                                                  realm.write(() {
-                                                    setState(() {
-                                                      item.first.name =
-                                                          nameCtrl.text;
-                                                      item.first.details =
-                                                          detailsCtrl.text;
-                                                      item.first.date =
-                                                          dateCtrl.text;
-                                                    });
-                                                  });
+                                                //   var item = realm
+                                                //       .all<Product>()
+                                                //       .query(
+                                                //           'name == "${product.name}"');
+                                                realm.write(() {
+                                                  item.first.name =
+                                                      nameCtrl.text;
+                                                  item.first.details =
+                                                      detailsCtrl.text;
+                                                  item.first.date =
+                                                      dateCtrl.text;
+                                                });
                                               });
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Products()),
+                                              );
                                             },
                                             child: Text('Edit'),
                                           ),
